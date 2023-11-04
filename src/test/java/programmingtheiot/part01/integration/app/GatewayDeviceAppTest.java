@@ -77,6 +77,7 @@ public class GatewayDeviceAppTest
 	
 	// test methods
 	
+	
 	/**
 	 * Convenience test method for starting and stopping the GDA. This will invoke both
 	 * {@link programmingtheiot.gda.app.GatewayDeviceApp#startApp()} and
@@ -91,7 +92,7 @@ public class GatewayDeviceAppTest
 		this.gda.startApp();
 		
 		try {
-			Thread.sleep(65000L);
+			Thread.sleep(5000L);
 		} catch (InterruptedException e) {
 			// ignore
 		}
