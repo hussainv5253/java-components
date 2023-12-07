@@ -34,8 +34,8 @@ import programmingtheiot.gda.connection.SmtpClientConnector;
 
 import programmingtheiot.gda.system.SystemPerformanceManager;
 /**
- * Shell representation of class for student implementation.
- *
+ * This class manages device data, including incoming messages, sensor data, actuator command responses,
+ * and system performance data. It starts and stops various components based on configuration settings.
  */
 public class DeviceDataManager implements IDataMessageListener
 {
@@ -62,7 +62,9 @@ public class DeviceDataManager implements IDataMessageListener
 	private SystemPerformanceManager sysPerfMgr = null;
 	
 	// constructors
-	
+	/**
+	 * Default constructor that reads configuration settings and initializes the manager.
+	 */
 	public DeviceDataManager()
 	{
 		super();
@@ -88,6 +90,9 @@ public class DeviceDataManager implements IDataMessageListener
 		initManager();
 	}
 	
+	/**
+	 * Constructor that allows setting the enablement of various components.
+	 */
 	public DeviceDataManager(
 		boolean enableSystemPerf,
 		boolean enableMqttClient,
@@ -109,6 +114,9 @@ public class DeviceDataManager implements IDataMessageListener
 	
 	
 	// public methods
+	/**
+	 * Handles actuator command responses and triggers further analysis.
+	 */
 	@Override
 	public boolean handleActuatorCommandResponse(ResourceNameEnum resourceName, ActuatorData data)
 	{
@@ -127,6 +135,9 @@ public class DeviceDataManager implements IDataMessageListener
 		}
 	}
 
+	/**
+	 * Handles generic incoming messages (not further processed at the moment).
+	 */
 	@Override
 	public boolean handleIncomingMessage(ResourceNameEnum resourceName, String msg)
 	{
@@ -141,6 +152,9 @@ public class DeviceDataManager implements IDataMessageListener
 		}
 	}
 
+	/**
+	 * Handles incoming sensor data, converts it to JSON, and triggers upstream transmission.
+	 */
 	@Override
 	public boolean handleSensorMessage(ResourceNameEnum resourceName, SensorData data)
 	{
@@ -162,6 +176,9 @@ public class DeviceDataManager implements IDataMessageListener
 		}
 	}
 
+	/**
+	 * Handles incoming system performance data, converts it to JSON, and triggers upstream transmission.
+	 */
 	@Override
 	public boolean handleSystemPerformanceMessage(ResourceNameEnum resourceName, SystemPerformanceData data)
 	{
@@ -183,10 +200,17 @@ public class DeviceDataManager implements IDataMessageListener
 	}
 
 	
+	/**
+	 * Sets the actuator data listener (not fully implemented yet).
+	 */
 	public void setActuatorDataListener(String name, IActuatorDataListener listener)
 	{
+		// TODO: Implement this method
 	}
 	
+	/**
+	 * Starts the DeviceDataManager, initializing and starting various components.
+	 */
 	public void startManager()
 	{
 		_Logger.info("DeviceDataManager is starting...");
@@ -222,6 +246,9 @@ public class DeviceDataManager implements IDataMessageListener
 		_Logger.info("DeviceDataManager started.");
 	}
 	
+	/**
+	 * Stops the DeviceDataManager, stopping various sub-components.
+	 */	
 	public void stopManager()
 	{
 		_Logger.info("DeviceDataManager is stopping...");

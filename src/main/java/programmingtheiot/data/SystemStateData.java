@@ -16,11 +16,8 @@ import programmingtheiot.common.ConfigConst;
 
 /**
  * Convenience wrapper to store system state data, including location
- * information, action command, state data and a list of the following
- * data items:
- * <p>SystemPerformanceData
- * <p>SensorData
- * 
+ * information, action command, state data, and a list of SystemPerformanceData
+ * and SensorData items.
  */
 public class SystemStateData extends BaseIotData implements Serializable
 {
@@ -46,43 +43,67 @@ public class SystemStateData extends BaseIotData implements Serializable
 	}
 	
 	// public methods
-	
+	/**
+	 * Adds a SystemPerformanceData item to the list.
+	 * @param data The SystemPerformanceData item to add.
+	 * @return boolean True if the addition was successful, false otherwise.
+	 */
 	public boolean addSystemPerformanceData(SystemPerformanceData data)
-    {
-        if (data != null) {
-            return this.sysPerfDataList.add(data);
-        }
-        return false;
-    }
-	
+	{
+		if (data != null) {
+			return this.sysPerfDataList.add(data);
+		}
+		return false;
+	}
+
+	/**
+	 * Adds a SensorData item to the list.
+	 * @param data The SensorData item to add.
+	 * @return boolean True if the addition was successful, false otherwise.
+	 */
 	public boolean addSensorData(SensorData data)
-    {
-        if (data != null) {
-            return this.sensorDataList.add(data);
-        }
-        return false;
-    }
+	{
+		if (data != null) {
+			return this.sensorDataList.add(data);
+		}
+		return false;
+	}
+	
+	/**
+	 * Setter method to set the action command value.
+	 * @param actionCmd The value to set for the action command.
+	 */
+	public void setCommand(int actionCmd)
+	{
+		this.command = actionCmd;
+	}
 
+	/**
+	 * Getter method to retrieve the action command.
+	 * @return int The action command value.
+	 */
+	public int getCommand()
+	{
+		return this.command;
+	}
 
-    public int getCommand()
-    {
-        return this.command;
-    }
+	/**
+	 * Getter method to retrieve the list of SensorData items.
+	 * @return List<SensorData> The list of SensorData items.
+	 */
+	public List<SensorData> getSensorDataList()
+	{
+		return this.sensorDataList;
+	}
 
-    public List<SensorData> getSensorDataList()
-    {
-        return this.sensorDataList;
-    }
-
-    public List<SystemPerformanceData> getSystemPerformanceDataList()
-    {
-        return this.sysPerfDataList;
-    }
-
-    public void setCommand(int actionCmd)
-    {
-        this.command = actionCmd;
-    }
+	/**
+	 * Getter method to retrieve the list of SystemPerformanceData items.
+	 * @return List<SystemPerformanceData> The list of SystemPerformanceData items.
+	 */
+	public List<SystemPerformanceData> getSystemPerformanceDataList()
+	{
+		return this.sysPerfDataList;
+	}
 	
 	/**
 	 * Returns a string representation of this instance. This will invoke the base class
@@ -107,6 +128,11 @@ public class SystemStateData extends BaseIotData implements Serializable
 	
 	/* (non-Javadoc)
 	 * @see programmingtheiot.data.BaseIotData#handleUpdateData(programmingtheiot.data.BaseIotData)
+	 */
+	/**
+	 * Handles the update of data for this instance by extracting the values from the provided
+	 * BaseIotData object if it is an instance of SystemStateData.
+	 * @param data The BaseIotData object to use for updating.
 	 */
 	protected void handleUpdateData(BaseIotData data)
 	{

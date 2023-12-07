@@ -16,8 +16,9 @@ import java.util.List;
 import com.google.gson.Gson;
 
 /**
- * Shell representation of class for student implementation.
- *
+ * This class, DataUtil, serves as a utility for converting data objects to and from JSON format. 
+ * The class includes methods for converting ActuatorData, SensorData, SystemPerformanceData, 
+ * and SystemStateData instances using the Google Gson library.
  */
 public class DataUtil
 {
@@ -53,18 +54,30 @@ public class DataUtil
 	
 	// public methods
 		
-	public String actuatorDataToJson(ActuatorData actuatordata)
+	/**
+	 * Converts ActuatorData to JSON format.
+	 *
+	 * @param actuatorData The ActuatorData instance to convert.
+	 * @return String The JSON representation of the ActuatorData.
+	 */
+	public String actuatorDataToJson(ActuatorData actuatorData)
 	{
 		String jsonData = null;
 		
-		if (actuatordata != null) {
+		if (actuatorData != null) {
 			Gson gson = new Gson();
-			jsonData = gson.toJson(actuatordata);
+			jsonData = gson.toJson(actuatorData);
 		}
 		
 		return jsonData;
 	}
 	
+	/**
+	 * Converts JSON data to ActuatorData.
+	 *
+	 * @param jsonData The JSON representation of ActuatorData.
+	 * @return ActuatorData The ActuatorData instance.
+	 */
 	public ActuatorData jsonToActuatorData(String jsonData)
 	{
 		ActuatorData data = null;
@@ -77,6 +90,12 @@ public class DataUtil
 		return data;
 	}
 		
+	/**
+	 * Converts SensorData to JSON format.
+	 *
+	 * @param sensorData The SensorData instance to convert.
+	 * @return String The JSON representation of the SensorData.
+	 */
 	public String sensorDataToJson(SensorData sensorData)
 	{
 		String jsonData = null;
@@ -89,6 +108,12 @@ public class DataUtil
 		return jsonData;
 	}
 	
+	/**
+	 * Converts JSON data to SensorData.
+	 *
+	 * @param jsonData The JSON representation of SensorData.
+	 * @return SensorData The SensorData instance.
+	 */
 	public SensorData jsonToSensorData(String jsonData)
 	{
 		SensorData data = null;
@@ -101,6 +126,12 @@ public class DataUtil
 		return data;
 	}
 			
+	/**
+	 * Converts SystemPerformanceData to JSON format.
+	 *
+	 * @param sysPerfData The SystemPerformanceData instance to convert.
+	 * @return String The JSON representation of the SystemPerformanceData.
+	 */
 	public String systemPerformanceDataToJson(SystemPerformanceData sysPerfData)
 	{
 		String jsonData = null;
@@ -113,6 +144,12 @@ public class DataUtil
 		return jsonData;
 	}
 	
+	/**
+	 * Converts JSON data to SystemPerformanceData.
+	 *
+	 * @param jsonData The JSON representation of SystemPerformanceData.
+	 * @return SystemPerformanceData The SystemPerformanceData instance.
+	 */
 	public SystemPerformanceData jsonToSystemPerformanceData(String jsonData)
 	{
 		SystemPerformanceData data = null;
@@ -125,6 +162,12 @@ public class DataUtil
 		return data;
 	}
 	
+	/**
+	 * Converts SystemStateData to JSON format.
+	 *
+	 * @param sysStateData The SystemStateData instance to convert.
+	 * @return String The JSON representation of the SystemStateData.
+	 */
 	public String systemStateDataToJson(SystemStateData sysStateData)
 	{
 		String jsonData = null;
@@ -137,6 +180,12 @@ public class DataUtil
 		return jsonData;
 	}
 	
+	/**
+	 * Converts JSON data to SystemStateData.
+	 *
+	 * @param jsonData The JSON representation of SystemStateData.
+	 * @return SystemStateData The SystemStateData instance.
+	 */
 	public SystemStateData jsonToSystemStateData(String jsonData)
 	{
 		SystemStateData data = null;
@@ -147,5 +196,5 @@ public class DataUtil
 		}
 		
 		return data;
-	}	
+	}		
 }

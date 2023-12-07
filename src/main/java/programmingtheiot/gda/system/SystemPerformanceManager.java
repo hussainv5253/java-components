@@ -23,8 +23,8 @@ import programmingtheiot.data.SystemPerformanceData;
 
 
 /**
- * Shell representation of class for student implementation.
- * 
+ * This class manages system performance data, including CPU utilization, memory utilization,
+ * and disk utilization, and sends this data to a specified listener.
  */
 public class SystemPerformanceManager
 {
@@ -46,8 +46,8 @@ public class SystemPerformanceManager
 	// constructors
 	
 	/**
-	 * Default.
-	 * 
+	 * Default constructor that initializes the SystemPerformanceManager with default values.
+	 * It reads the poll rate and location ID from the configuration.
 	 */
 	public SystemPerformanceManager()
 	{
@@ -72,8 +72,14 @@ public class SystemPerformanceManager
 			this.handleTelemetry();
 		};
 	}
-		// public methods
 	
+	
+	// public methods
+	
+	/**
+	 * Handles the collection of system performance telemetry data and sends it to the listener.
+	 * The collected data includes CPU utilization, memory utilization, and disk utilization.
+	 */
 	public void handleTelemetry()
 	{
 		float cpuUtil = this.sysCpuUtilTask.getTelemetryValue();
@@ -95,6 +101,10 @@ public class SystemPerformanceManager
 		}
 	}
 	
+	/**
+	 * Sets the data message listener to be used for sending system performance data.
+	 * @param listener The data message listener to set.
+	 */
 	public void setDataMessageListener(IDataMessageListener listener)
 	{
 		if (listener != null) {
@@ -102,6 +112,10 @@ public class SystemPerformanceManager
 		}
 	}
 	
+	/**
+	 * Starts the SystemPerformanceManager by scheduling tasks to collect and send system performance data.
+	 * @return boolean True if the manager is started successfully, false otherwise.
+	 */
 	public boolean startManager()
 	{
 		if (! this.isStarted) {
@@ -120,6 +134,10 @@ public class SystemPerformanceManager
 		return this.isStarted;
 	}
 
+	/**
+	 * Stops the SystemPerformanceManager by shutting down the scheduler.
+	 * @return boolean True if the manager is stopped successfully, false otherwise.
+	 */
 	public boolean stopManager()
 	{
 		//Shut down scheduler and stop the manager
