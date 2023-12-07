@@ -32,7 +32,7 @@ public class ConfigConst
 	public static final int    DEFAULT_MQTT_PORT        = 1883;
 	public static final int    DEFAULT_MQTT_SECURE_PORT = 8883;
 	public static final int    DEFAULT_KEEP_ALIVE       = 60;
-	public static final int    DEFAULT_POLL_CYCLES      = 60;
+	public static final int    DEFAULT_POLL_CYCLES      = 5;
 	public static final int    DEFAULT_TTL              = 60;
 	
 	public static final float  DEFAULT_VAL = 0.0f;

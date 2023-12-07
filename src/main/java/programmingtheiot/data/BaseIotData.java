@@ -53,7 +53,8 @@ public abstract class BaseIotData implements Serializable
 	 * Default.
 	 * 
 	 * Initializes the location ID from the config file and updates the timestamp.
-	 * 
+	 * @param name   The name of the IoT data. Default is {@see ConfigConst.NOT_SET}.
+	 * @param typeID The type ID of the IoT data. Default is {@see ConfigConst.DEFAULT_TYPE_ID}.
 	 */
 	protected BaseIotData()
 	{
@@ -67,7 +68,7 @@ public abstract class BaseIotData implements Serializable
 		
 		updateTimeStamp();
 	}
-	
+
 	
 	// public methods
 	

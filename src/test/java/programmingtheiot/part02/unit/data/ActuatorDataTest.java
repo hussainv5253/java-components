@@ -66,17 +66,19 @@ public class ActuatorDataTest
 		assertEquals(ad.getStatusCode(), ConfigConst.DEFAULT_STATUS);
 		assertTrue(ad.getCommand() == ConfigConst.DEFAULT_COMMAND);
 		assertTrue(ad.getValue() == ConfigConst.DEFAULT_VAL);
+		_Logger.info("ActuatorData obj: " + ad.toString());
 	}
 	
 	@Test
 	public void testParameterUpdates()
 	{
 		ActuatorData ad = createTestData();
-		
+	
 		assertEquals(ad.getName(), DEFAULT_NAME);
 		assertEquals(ad.getStatusCode(), ActuatorData.DEFAULT_STATUS);
 		assertTrue(ad.getCommand() == DEFAULT_CMD);
 		assertTrue(ad.getValue() == DEFAULT_VAL);
+		_Logger.info("ActuatorData obj: " + ad.toString());
 	}
 	
 	@Test
@@ -84,18 +86,26 @@ public class ActuatorDataTest
 	{
 		ActuatorData ad = new ActuatorData();
 		ActuatorData ad2 = createTestData();
+		
 
 		assertEquals(ad.getName(), ConfigConst.NOT_SET);
 		assertEquals(ad.getStatusCode(), ConfigConst.DEFAULT_STATUS);
 		assertTrue(ad.getCommand() == ConfigConst.DEFAULT_COMMAND);
 		assertTrue(ad.getValue() == ConfigConst.DEFAULT_VAL);
 		
+		_Logger.info("ActuatorData obj: " + ad.toString());
+		_Logger.info("ActuatorData obj2: " + ad2.toString());
+
 		ad.updateData(ad2);
 		
 		assertEquals(ad.getName(), DEFAULT_NAME);
 		assertEquals(ad.getStatusCode(), ConfigConst.DEFAULT_STATUS);
 		assertTrue(ad.getCommand() == DEFAULT_CMD);
 		assertTrue(ad.getValue() == DEFAULT_VAL);
+		
+		_Logger.info("Updated ActuatorData obj: " + ad.toString());
+		_Logger.info("ActuatorData obj2: " + ad2.toString());
+
 	}
 	
 	

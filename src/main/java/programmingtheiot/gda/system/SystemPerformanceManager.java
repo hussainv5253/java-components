@@ -35,9 +35,13 @@ public class SystemPerformanceManager
 	private ScheduledExecutorService schedExecSvc = null;
 	private SystemCpuUtilTask sysCpuUtilTask = null;
 	private SystemMemUtilTask sysMemUtilTask = null;
+	private SystemDiskUtilTask sysDiskUtilTask = null;
 
 	private Runnable taskRunner = null;
 	private boolean isStarted = false;
+	
+	private String locationID = ConfigConst.NOT_SET;
+	private IDataMessageListener dataMsgListener = null;
 	
 	// constructors
 	
@@ -54,9 +58,14 @@ public class SystemPerformanceManager
 			this.pollRate = ConfigConst.DEFAULT_POLL_CYCLES;
 		}
 		
+		this.locationID =
+				ConfigUtil.getInstance().getProperty(
+					ConfigConst.GATEWAY_DEVICE, ConfigConst.LOCATION_ID_PROP, ConfigConst.NOT_SET);
+		
 		this.schedExecSvc   = Executors.newScheduledThreadPool(1);
 		this.sysCpuUtilTask = new SystemCpuUtilTask();
 		this.sysMemUtilTask = new SystemMemUtilTask();
+		this.sysDiskUtilTask = new SystemDiskUtilTask();
 		
 		// Define the Runnable task which is called by the scheduler
 		this.taskRunner = () -> {
@@ -67,14 +76,30 @@ public class SystemPerformanceManager
 	
 	public void handleTelemetry()
 	{
-		//Print out the Utilization percentages of CPU and Memory. Revert Logger to fine for next branch
 		float cpuUtil = this.sysCpuUtilTask.getTelemetryValue();
 		float memUtil = this.sysMemUtilTask.getTelemetryValue();
-		_Logger.info("CPU utilization: " + cpuUtil + ", Mem utilization: " + memUtil);
+		float diskUtil = this.sysDiskUtilTask.getTelemetryValue();
+		
+		// TODO: change the log level to 'info' for testing purposes
+		_Logger.info("CPU utilization: " + cpuUtil + ", Mem utilization: " + memUtil + ", Disk utilization: " + diskUtil);
+		
+		SystemPerformanceData spd = new SystemPerformanceData();
+		spd.setLocationID(this.locationID);
+		spd.setCpuUtilization(cpuUtil);
+		spd.setMemoryUtilization(memUtil);
+		spd.setDiskUtilization(diskUtil);
+		
+		if (this.dataMsgListener != null) {
+			this.dataMsgListener.handleSystemPerformanceMessage(
+				ResourceNameEnum.GDA_SYSTEM_PERF_MSG_RESOURCE, spd);
+		}
 	}
 	
 	public void setDataMessageListener(IDataMessageListener listener)
 	{
+		if (listener != null) {
+			this.dataMsgListener = listener;
+		}
 	}
 	
 	public boolean startManager()

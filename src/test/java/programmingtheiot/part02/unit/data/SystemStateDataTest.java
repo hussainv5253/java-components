@@ -70,7 +70,7 @@ public class SystemStateDataTest
 	 * 
 	 */
 	
-//	@Test
+	@Test
 	public void testDefaultValues()
 	{
 		SystemStateData ssd = new SystemStateData();
@@ -78,9 +78,10 @@ public class SystemStateDataTest
 		assertEquals(ssd.getName(), ConfigConst.SYS_STATE_DATA);
 		assertEquals(ssd.getStatusCode(), ConfigConst.DEFAULT_STATUS);
 		assertTrue(ssd.getCommand() == ConfigConst.DEFAULT_COMMAND);
+		_Logger.info("Created SystemStateData obj: " + ssd.toString());
 	}
 	
-//	@Test
+	@Test
 	public void testParameterUpdates()
 	{
 		SystemStateData ssd = createTestData();
@@ -102,9 +103,10 @@ public class SystemStateDataTest
 			assertTrue(spd.getDiskUtilization() == DEFAULT_VAL);
 			assertTrue(spd.getMemoryUtilization() == DEFAULT_VAL);
 		}
+		_Logger.info("Created SystemStateData obj: " + ssd.toString());
 	}
 	
-//	@Test
+	@Test
 	public void testFullUpdate()
 	{
 		SystemStateData ssd = new SystemStateData();
@@ -113,6 +115,9 @@ public class SystemStateDataTest
 		assertEquals(ssd.getName(), ConfigConst.SYS_STATE_DATA);
 		assertEquals(ssd.getStatusCode(), ConfigConst.DEFAULT_STATUS);
 		assertTrue(ssd.getCommand() == ConfigConst.DEFAULT_COMMAND);
+		
+		_Logger.info("Created SystemStateData obj: " + ssd.toString());
+		_Logger.info("Created SystemStateData obj2: " + ssd2.toString());
 		
 		ssd.updateData(ssd2);
 		
@@ -133,6 +138,7 @@ public class SystemStateDataTest
 			assertTrue(spd.getDiskUtilization() == DEFAULT_VAL);
 			assertTrue(spd.getMemoryUtilization() == DEFAULT_VAL);
 		}
+		_Logger.info("Updated SystemStateData obj: " + ssd.toString());
 	}
 	
 	
