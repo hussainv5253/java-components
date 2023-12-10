@@ -57,10 +57,12 @@ public class DataUtilTest
 		data.setValue(DEFAULT_VAL);
 		
 		String jsonData = dataUtil.actuatorDataToJson(data);
-		
+		_Logger.info("ActuatorData: " + jsonData.toString());
+
 		assertNotNull(jsonData);
 				
 		ActuatorData data2 = dataUtil.jsonToActuatorData(jsonData);
+		_Logger.info("ActuatorData: " + data2.toString());
 		
 		assertEquals(data.getName(), data2.getName());
 		assertTrue(data.getStatusCode() == data2.getStatusCode());
@@ -79,10 +81,12 @@ public class DataUtilTest
 		data.setValue(DEFAULT_VAL);
 		
 		String jsonData = dataUtil.sensorDataToJson(data);
+		_Logger.info("SensorData: " + jsonData.toString());
 		
 		assertNotNull(jsonData);
 		
 		SensorData data2 = dataUtil.jsonToSensorData(jsonData);
+		_Logger.info("SensorData: " + data2.toString());
 		
 		assertEquals(data.getName(), data2.getName());
 		assertTrue(data.getStatusCode() == data2.getStatusCode());
@@ -102,10 +106,12 @@ public class DataUtilTest
 		data.setMemoryUtilization(DEFAULT_VAL);
 		
 		String jsonData = dataUtil.systemPerformanceDataToJson(data);
-		
+		_Logger.info("SystemPerformanceData: " + jsonData.toString());
+
 		assertNotNull(jsonData);
 		
 		SystemPerformanceData data2 = dataUtil.jsonToSystemPerformanceData(jsonData);
+		_Logger.info("SystemPerformanceData: " + data2.toString());
 		
 		assertEquals(data.getName(), data2.getName());
 		assertTrue(data.getStatusCode() == data2.getStatusCode());
@@ -121,7 +127,7 @@ public class DataUtilTest
 	 * 
 	 */
 	
-//	@Test
+	@Test
 	public void testSystemStateDatatoJsonAndBack()
 	{
 		DataUtil dataUtil = DataUtil.getInstance();
@@ -132,10 +138,13 @@ public class DataUtilTest
 		data.setCommand(DEFAULT_CMD);
 		
 		String jsonData = dataUtil.systemStateDataToJson(data);
-		
+		_Logger.info("SystemStateData: " + jsonData.toString());
+
 		assertNotNull(jsonData);
 		
 		SystemStateData data2 = dataUtil.jsonToSystemStateData(jsonData);
+		_Logger.info("SystemStateData: " + data2.toString());
+
 		
 		assertEquals(data.getName(), data2.getName());
 		assertTrue(data.getStatusCode() == data2.getStatusCode());
