@@ -23,11 +23,9 @@ import programmingtheiot.data.SystemPerformanceData;
 
 
 /**
- * This class manages system performance monitoring for the gateway device agent (GDA).
- * It is responsible for periodically collecting and logging CPU and memory utilization metrics.
- * The manager can be started and stopped, allowing control over the monitoring process.
- * The monitoring frequency is configurable through the pollRate parameter.
- */ 
+ * This class manages system performance data, including CPU utilization, memory utilization,
+ * and disk utilization, and sends this data to a specified listener.
+ */
 public class SystemPerformanceManager
 {
 	// private var's
@@ -37,15 +35,19 @@ public class SystemPerformanceManager
 	private ScheduledExecutorService schedExecSvc = null;
 	private SystemCpuUtilTask sysCpuUtilTask = null;
 	private SystemMemUtilTask sysMemUtilTask = null;
+	private SystemDiskUtilTask sysDiskUtilTask = null;
 
 	private Runnable taskRunner = null;
 	private boolean isStarted = false;
 	
+	private String locationID = ConfigConst.NOT_SET;
+	private IDataMessageListener dataMsgListener = null;
+	
 	// constructors
 	
 	/**
-	 * Default constructor.
-	 * Initializes SystemPerformanceManager with default poll rate from configuration.
+	 * Default constructor that initializes the SystemPerformanceManager with default values.
+	 * It reads the poll rate and location ID from the configuration.
 	 */
 	public SystemPerformanceManager()
 	{
@@ -56,9 +58,14 @@ public class SystemPerformanceManager
 			this.pollRate = ConfigConst.DEFAULT_POLL_CYCLES;
 		}
 		
+		this.locationID =
+				ConfigUtil.getInstance().getProperty(
+					ConfigConst.GATEWAY_DEVICE, ConfigConst.LOCATION_ID_PROP, ConfigConst.NOT_SET);
+		
 		this.schedExecSvc   = Executors.newScheduledThreadPool(1);
 		this.sysCpuUtilTask = new SystemCpuUtilTask();
 		this.sysMemUtilTask = new SystemMemUtilTask();
+		this.sysDiskUtilTask = new SystemDiskUtilTask();
 		
 		// Define the Runnable task which is called by the scheduler
 		this.taskRunner = () -> {
@@ -66,32 +73,48 @@ public class SystemPerformanceManager
 		};
 	}
 	
-	// public methods
 
+	// public methods
+	
 	/**
-	 * Method to handle telemetry by getting CPU and memory utilization and logging them.
+	 * Handles the collection of system performance telemetry data and sends it to the listener.
+	 * The collected data includes CPU utilization, memory utilization, and disk utilization.
 	 */
 	public void handleTelemetry()
 	{
-		//Print out the Utilization percentages of CPU and Memory. Revert Logger to fine for next branch
 		float cpuUtil = this.sysCpuUtilTask.getTelemetryValue();
 		float memUtil = this.sysMemUtilTask.getTelemetryValue();
-		_Logger.info("CPU utilization: " + cpuUtil + ", Mem utilization: " + memUtil);
+		float diskUtil = this.sysDiskUtilTask.getTelemetryValue();
+		
+		// TODO: change the log level to 'info' for testing purposes
+		_Logger.info("CPU utilization: " + cpuUtil + ", Mem utilization: " + memUtil + ", Disk utilization: " + diskUtil);
+		
+		SystemPerformanceData spd = new SystemPerformanceData();
+		spd.setLocationID(this.locationID);
+		spd.setCpuUtilization(cpuUtil);
+		spd.setMemoryUtilization(memUtil);
+		spd.setDiskUtilization(diskUtil);
+		
+		if (this.dataMsgListener != null) {
+			this.dataMsgListener.handleSystemPerformanceMessage(
+				ResourceNameEnum.GDA_SYSTEM_PERF_MSG_RESOURCE, spd);
+		}
 	}
 
 	/**
-	 * Set the data message listener.
-	 *
+	 * Sets the data message listener to be used for sending system performance data.
 	 * @param listener The data message listener to set.
 	 */
 	public void setDataMessageListener(IDataMessageListener listener)
 	{
+		if (listener != null) {
+			this.dataMsgListener = listener;
+		}
 	}
 
 	/**
-	 * Start the system performance manager.
-	 *
-	 * @return True if the manager is successfully started, false otherwise.
+	 * Starts the SystemPerformanceManager by scheduling tasks to collect and send system performance data.
+	 * @return boolean True if the manager is started successfully, false otherwise.
 	 */
 	public boolean startManager()
 	{
@@ -112,9 +135,8 @@ public class SystemPerformanceManager
 	}
 
 	/**
-	 * Stop the system performance manager.
-	 *
-	 * @return True if the manager is successfully stopped, false otherwise.
+	 * Stops the SystemPerformanceManager by shutting down the scheduler.
+	 * @return boolean True if the manager is stopped successfully, false otherwise.
 	 */
 	public boolean stopManager()
 	{

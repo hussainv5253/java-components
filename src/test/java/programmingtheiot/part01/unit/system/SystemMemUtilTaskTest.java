@@ -83,11 +83,12 @@ public class SystemMemUtilTaskTest
 	public void testGetTelemetryValue()
 	{
 		float memUtil  = 0.0f;
-		int   totTests = 5;
+		int   totTests = 15;
 		
-		memUtil = this.memUtilTask.getTelemetryValue();
+//		memUtil = this.memUtilTask.getTelemetryValue();
 		
 		for (int i = 1; i <= totTests; i++) {
+			memUtil = this.memUtilTask.getTelemetryValue();
 			if (memUtil >= 0.0f) {
 				_Logger.info("Test " + i + ": Memory Util: " + memUtil);
 				assertTrue(memUtil >= 0.0f);
@@ -96,6 +97,7 @@ public class SystemMemUtilTaskTest
 			} else {
 				fail("Failed to retrieve Memory utilization.");
 			}
+			
 		}
 	}
 	

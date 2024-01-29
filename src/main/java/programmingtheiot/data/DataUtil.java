@@ -16,8 +16,9 @@ import java.util.List;
 import com.google.gson.Gson;
 
 /**
- * Shell representation of class for student implementation.
- *
+ * This class, DataUtil, serves as a utility for converting data objects to and from JSON format. 
+ * The class includes methods for converting ActuatorData, SensorData, SystemPerformanceData, 
+ * and SystemStateData instances using the Google Gson library.
  */
 public class DataUtil
 {
@@ -52,45 +53,148 @@ public class DataUtil
 	
 	
 	// public methods
-	
+		
+	/**
+	 * Converts ActuatorData to JSON format.
+	 *
+	 * @param actuatorData The ActuatorData instance to convert.
+	 * @return String The JSON representation of the ActuatorData.
+	 */
 	public String actuatorDataToJson(ActuatorData actuatorData)
 	{
-		return null;
+		String jsonData = null;
+		
+		if (actuatorData != null) {
+			Gson gson = new Gson();
+			jsonData = gson.toJson(actuatorData);
+		}
+		
+		return jsonData;
 	}
 	
-	public String sensorDataToJson(SensorData sensorData)
-	{
-		return null;
-	}
-	
-	public String systemPerformanceDataToJson(SystemPerformanceData sysPerfData)
-	{
-		return null;
-	}
-	
-	public String systemStateDataToJson(SystemStateData sysStateData)
-	{
-		return null;
-	}
-	
+	/**
+	 * Converts JSON data to ActuatorData.
+	 *
+	 * @param jsonData The JSON representation of ActuatorData.
+	 * @return ActuatorData The ActuatorData instance.
+	 */
 	public ActuatorData jsonToActuatorData(String jsonData)
 	{
-		return null;
+		ActuatorData data = null;
+		
+		if (jsonData != null && jsonData.trim().length() > 0) {
+			Gson gson = new Gson();
+			data = gson.fromJson(jsonData, ActuatorData.class);
+		}
+		
+		return data;
+	}
+		
+	/**
+	 * Converts SensorData to JSON format.
+	 *
+	 * @param sensorData The SensorData instance to convert.
+	 * @return String The JSON representation of the SensorData.
+	 */
+	public String sensorDataToJson(SensorData sensorData)
+	{
+		String jsonData = null;
+		
+		if (sensorData != null) {
+			Gson gson = new Gson();
+			jsonData = gson.toJson(sensorData);
+		}
+		
+		return jsonData;
 	}
 	
+	/**
+	 * Converts JSON data to SensorData.
+	 *
+	 * @param jsonData The JSON representation of SensorData.
+	 * @return SensorData The SensorData instance.
+	 */
 	public SensorData jsonToSensorData(String jsonData)
 	{
-		return null;
+		SensorData data = null;
+		
+		if (jsonData != null && jsonData.trim().length() > 0) {
+			Gson gson = new Gson();
+			data = gson.fromJson(jsonData, SensorData.class);
+		}
+		
+		return data;
+	}
+			
+	/**
+	 * Converts SystemPerformanceData to JSON format.
+	 *
+	 * @param sysPerfData The SystemPerformanceData instance to convert.
+	 * @return String The JSON representation of the SystemPerformanceData.
+	 */
+	public String systemPerformanceDataToJson(SystemPerformanceData sysPerfData)
+	{
+		String jsonData = null;
+		
+		if (sysPerfData != null) {
+			Gson gson = new Gson();
+			jsonData = gson.toJson(sysPerfData);
+		}
+		
+		return jsonData;
 	}
 	
+	/**
+	 * Converts JSON data to SystemPerformanceData.
+	 *
+	 * @param jsonData The JSON representation of SystemPerformanceData.
+	 * @return SystemPerformanceData The SystemPerformanceData instance.
+	 */
 	public SystemPerformanceData jsonToSystemPerformanceData(String jsonData)
 	{
-		return null;
+		SystemPerformanceData data = null;
+		
+		if (jsonData != null && jsonData.trim().length() > 0) {
+			Gson gson = new Gson();
+			data = gson.fromJson(jsonData, SystemPerformanceData.class);
+		}
+		
+		return data;
 	}
 	
+	/**
+	 * Converts SystemStateData to JSON format.
+	 *
+	 * @param sysStateData The SystemStateData instance to convert.
+	 * @return String The JSON representation of the SystemStateData.
+	 */
+	public String systemStateDataToJson(SystemStateData sysStateData)
+	{
+		String jsonData = null;
+		
+		if (sysStateData != null) {
+			Gson gson = new Gson();
+			jsonData = gson.toJson(sysStateData);
+		}
+		
+		return jsonData;
+	}
+	
+	/**
+	 * Converts JSON data to SystemStateData.
+	 *
+	 * @param jsonData The JSON representation of SystemStateData.
+	 * @return SystemStateData The SystemStateData instance.
+	 */
 	public SystemStateData jsonToSystemStateData(String jsonData)
 	{
-		return null;
-	}
-	
+		SystemStateData data = null;
+		
+		if (jsonData != null && jsonData.trim().length() > 0) {
+			Gson gson = new Gson();
+			data = gson.fromJson(jsonData, SystemStateData.class);
+		}
+		
+		return data;
+	}		
 }

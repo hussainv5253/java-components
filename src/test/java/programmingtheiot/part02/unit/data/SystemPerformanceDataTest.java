@@ -105,7 +105,7 @@ public class SystemPerformanceDataTest
 		assertTrue(spd.getMemoryUtilization() == ConfigConst.DEFAULT_VAL);
 		
 		spd.updateData(spd2);
-		_Logger.info("Updated second data obj: " + spd2.toString());
+		_Logger.info("Updated First data obj: " + spd.toString());
 		
 		assertEquals(spd.getName(), DEFAULT_NAME);
 		assertEquals(spd.getStatusCode(), SystemPerformanceData.DEFAULT_STATUS);

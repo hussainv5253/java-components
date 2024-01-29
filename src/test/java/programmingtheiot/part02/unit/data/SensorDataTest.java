@@ -64,6 +64,8 @@ public class SensorDataTest
 		assertEquals(ssd.getName(), ConfigConst.NOT_SET);
 		assertEquals(ssd.getStatusCode(), SensorData.DEFAULT_STATUS);
 		assertTrue(ssd.getValue() == ConfigConst.DEFAULT_VAL);
+		_Logger.info("SensorData obj: " + ssd.toString());
+
 	}
 	
 	@Test
@@ -74,6 +76,7 @@ public class SensorDataTest
 		assertEquals(ssd.getName(), DEFAULT_NAME);
 		assertEquals(ssd.getStatusCode(), SensorData.DEFAULT_STATUS);
 		assertTrue(ssd.getValue() == ConfigConst.DEFAULT_VAL);
+		_Logger.info("SensorData obj: " + ssd.toString());
 	}
 	
 	@Test
@@ -86,11 +89,17 @@ public class SensorDataTest
 		assertEquals(ssd.getStatusCode(), SensorData.DEFAULT_STATUS);
 		assertTrue(ssd.getValue() == ConfigConst.DEFAULT_VAL);
 		
+		_Logger.info("SensorData obj: " + ssd.toString());
+		_Logger.info("SensorData obj2: " + ssd2.toString());
+		
 		ssd.updateData(ssd2);
 		
 		assertEquals(ssd.getName(), DEFAULT_NAME);
 		assertEquals(ssd.getStatusCode(), SensorData.DEFAULT_STATUS);
 		assertTrue(ssd.getValue() == ConfigConst.DEFAULT_VAL);
+		
+		_Logger.info("Updated SensorData obj: " + ssd.toString());
+		_Logger.info("SensorData obj2: " + ssd2.toString());
 	}
 	
 	@Test
