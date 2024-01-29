@@ -17,16 +17,15 @@ import programmingtheiot.common.ConfigConst;
 
 
 /**
- * Shell representation of class for student implementation.
- * 
+ * Represents a task to measure CPU utilization.
  */
 public class SystemCpuUtilTask extends BaseSystemUtilTask
 {
 	// constructors
 	
 	/**
-	 * Default.
-	 * 
+	 * Default constructor.
+	 * Initializes SystemCpuUtilTask with default type ID.
 	 */
 	public SystemCpuUtilTask()
 	{
@@ -35,6 +34,12 @@ public class SystemCpuUtilTask extends BaseSystemUtilTask
 	
 	
 	// public methods
+
+	/**
+	 * Get the telemetry value representing CPU utilization.
+	 *
+	 * @return The CPU utilization as a floating point value.
+	 */
 	@Override
 	public float getTelemetryValue()
 	{

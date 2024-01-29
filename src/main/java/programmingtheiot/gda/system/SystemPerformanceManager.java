@@ -73,7 +73,7 @@ public class SystemPerformanceManager
 		};
 	}
 	
-	
+
 	// public methods
 	
 	/**
@@ -100,7 +100,7 @@ public class SystemPerformanceManager
 				ResourceNameEnum.GDA_SYSTEM_PERF_MSG_RESOURCE, spd);
 		}
 	}
-	
+
 	/**
 	 * Sets the data message listener to be used for sending system performance data.
 	 * @param listener The data message listener to set.
@@ -111,7 +111,7 @@ public class SystemPerformanceManager
 			this.dataMsgListener = listener;
 		}
 	}
-	
+
 	/**
 	 * Starts the SystemPerformanceManager by scheduling tasks to collect and send system performance data.
 	 * @return boolean True if the manager is started successfully, false otherwise.
