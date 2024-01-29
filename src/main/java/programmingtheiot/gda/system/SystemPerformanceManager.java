@@ -22,10 +22,6 @@ import programmingtheiot.common.ResourceNameEnum;
 import programmingtheiot.data.SystemPerformanceData;
 
 
-/**
- * Shell representation of class for student implementation.
- * 
- */
 public class SystemPerformanceManager
 {
 	// private var's
@@ -42,8 +38,8 @@ public class SystemPerformanceManager
 	// constructors
 	
 	/**
-	 * Default.
-	 * 
+	 * Default constructor.
+	 * Initializes SystemPerformanceManager with default poll rate from configuration.
 	 */
 	public SystemPerformanceManager()
 	{
@@ -63,8 +59,12 @@ public class SystemPerformanceManager
 			this.handleTelemetry();
 		};
 	}
-		// public methods
 	
+	// public methods
+
+	/**
+	 * Method to handle telemetry by getting CPU and memory utilization and logging them.
+	 */
 	public void handleTelemetry()
 	{
 		//Print out the Utilization percentages of CPU and Memory. Revert Logger to fine for next branch
@@ -72,11 +72,21 @@ public class SystemPerformanceManager
 		float memUtil = this.sysMemUtilTask.getTelemetryValue();
 		_Logger.info("CPU utilization: " + cpuUtil + ", Mem utilization: " + memUtil);
 	}
-	
+
+	/**
+	 * Set the data message listener.
+	 *
+	 * @param listener The data message listener to set.
+	 */
 	public void setDataMessageListener(IDataMessageListener listener)
 	{
 	}
-	
+
+	/**
+	 * Start the system performance manager.
+	 *
+	 * @return True if the manager is successfully started, false otherwise.
+	 */
 	public boolean startManager()
 	{
 		if (! this.isStarted) {
@@ -95,6 +105,11 @@ public class SystemPerformanceManager
 		return this.isStarted;
 	}
 
+	/**
+	 * Stop the system performance manager.
+	 *
+	 * @return True if the manager is successfully stopped, false otherwise.
+	 */
 	public boolean stopManager()
 	{
 		//Shut down scheduler and stop the manager
