@@ -16,8 +16,7 @@ import java.util.logging.Logger;
 import programmingtheiot.common.ConfigConst;
 
 /**
- * Shell representation of class for student implementation.
- * 
+ * Represents a task to measure memory utilization.
  */
 public class SystemMemUtilTask extends BaseSystemUtilTask
 {
@@ -25,8 +24,8 @@ public class SystemMemUtilTask extends BaseSystemUtilTask
 	// constructors
 	
 	/**
-	 * Default.
-	 * 
+	 * Default constructor.
+	 * Initializes SystemMemUtilTask with default type ID.
 	 */
 	public SystemMemUtilTask()
 	{
@@ -35,6 +34,12 @@ public class SystemMemUtilTask extends BaseSystemUtilTask
 	
 	
 	// public methods
+
+	/**
+	 * Get the telemetry value representing memory utilization.
+	 *
+	 * @return The memory utilization as a floating point value.
+	 */
 	@Override
 	public float getTelemetryValue()
 	{
