@@ -22,6 +22,12 @@ import programmingtheiot.common.ResourceNameEnum;
 import programmingtheiot.data.SystemPerformanceData;
 
 
+/**
+ * This class manages system performance monitoring for the gateway device agent (GDA).
+ * It is responsible for periodically collecting and logging CPU and memory utilization metrics.
+ * The manager can be started and stopped, allowing control over the monitoring process.
+ * The monitoring frequency is configurable through the pollRate parameter.
+ */ 
 public class SystemPerformanceManager
 {
 	// private var's
