@@ -19,7 +19,6 @@ public class ConfigConst
 	/*****
 	 * General Names and Defaults
 	 */
-	
 	public static final String NOT_SET = "Not Set";
 	
 	public static final String DEFAULT_HOST             = "localhost";

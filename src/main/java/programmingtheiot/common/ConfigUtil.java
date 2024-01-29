@@ -28,7 +28,7 @@ import org.apache.commons.configuration2.ex.ConfigurationException;
 public class ConfigUtil
 {
 	// static
-	
+
 	private static final Logger _Logger =
 		Logger.getLogger(ConfigUtil.class.getName());
 	
